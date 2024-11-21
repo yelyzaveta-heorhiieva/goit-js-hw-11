@@ -33,6 +33,6 @@ export function errorAlert(error) {
             message: `${error}`,
             messageColor: 'white',
             overlayColor: 'rgba(0, 0, 0, 0.6)',
-        });
+   });   
 }
         

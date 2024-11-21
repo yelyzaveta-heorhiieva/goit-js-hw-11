@@ -4,6 +4,7 @@ const form = document.querySelector('.search-form');
 
 form.addEventListener('submit', formSubmit);
 
+
 function formSubmit(event) {
     event.preventDefault();
     form.nextElementSibling.innerHTML = '';
@@ -20,19 +21,23 @@ function formSubmit(event) {
     const URL = `https://pixabay.com/api/?${searchParams}`;
 
     form.insertAdjacentHTML('afterend', '<div class="load"><span class="loader"></span>....Loading....Please, wait!</div>');
-
-    return setTimeout(() => {
-        fetch(URL)
+    const load = document.querySelector('.load');
+    return fetch(URL)
         .then(response => {
             if (!response.ok) {
                 throw new Error(response.status);
             }
-            const load = document.querySelector('.load');
-            load.remove();
             return response.json();
         })
-        .then((data) => galleryCreate(data))
-        .catch((error) => errorAlert(error));
-    }, 1000)
+        .then((data) => {
+            load.remove();
+            galleryCreate(data);
+        })
+
+        .catch((error) => {
+            load.remove();
+            errorAlert(error);
+        });
 }
 
+    
