@@ -6,6 +6,7 @@ form.addEventListener('submit', formSubmit);
 
 function formSubmit(event) {
     event.preventDefault();
+    form.nextElementSibling.innerHTML = '';
     if (!event.target.elements.searchQuery.value) {
         return;
     }
